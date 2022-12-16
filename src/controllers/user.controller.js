@@ -11,10 +11,10 @@ module.exports.getUsersWithPostCount = async (req, res) => {
         var us = await User.find({}, {__v: 0}).count();
         
         const totalDocs = us;
-        const page = req.query.page || 0;
+        const page = Number(req.query.page) || 1;
         let prevPage = page - 1;
         let nextPage = page + 1;
-        const limit = req.query.limit || 10;
+        const limit = Number(req.query.limit) || 10;
         const totalPages = totalDocs/limit;
         if(prevPage < 0){
             prevPage = null;
@@ -43,7 +43,7 @@ module.exports.getUsersWithPostCount = async (req, res) => {
             data: {
                 "users": updatedUs,
                 "pagination":{
-                    "total docs": totalDocs,
+                    "totalDocs": totalDocs,
                     "page": page,
                     "limit": limit,
                     "totalPages": totalPages,
