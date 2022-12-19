@@ -39,7 +39,7 @@ module.exports.getUsersWithPostCount = async (req, res) => {
        
 
 
-        res.status(200).json({
+        res.status(200).send({
             data: {
                 "users": updatedUs,
                 "pagination":{
